@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.yosoft.sanadapp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets">
+    <name>Sanad App</name>
+    <description>Auto-generated Android App via Sanad AI Platform</description>
+    <author email="yousef@yosoft.com">Yosoft Engine</author>
+    <content src="index.html" />
+    <access origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+</widget>
