@@ -1,0 +1,32 @@
+name: Automated Android Direct Build
+on:
+  push:
+    branches: [ main ]
+permissions:
+  contents: write
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Source Code
+      uses: actions/checkout@v4
+    - name: Setup Node.js Environment
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    - name: Install Cordova & Build Android APK
+      run: |
+        npm install -g cordova
+        cordova create app com.yosoft.sanadapp "Sanad App"
+        cp www/index.html app/www/index.html
+        cd app
+        cordova platform add android
+        cordova build android --no-telemetry
+    - name: Create GitHub Direct Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: v1.0.0
+        name: "Sanad App Release v1.0.0"
+        files: app/platforms/android/app/build/outputs/apk/debug/app-debug.apk
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
